@@ -801,3 +801,4 @@ function resizeWidth() {
 	} else {
 		document.body.style.zoom = 1;
 	}
+}

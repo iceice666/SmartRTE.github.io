@@ -561,7 +561,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	async function savePageAsImage() {
 		const body = document.body;
-		const bg = document.getElementById("bgImg");
+		const bg = document.getElementById("background");
 		const captureWidth = bg.width; //1700
 		const captureHeight = bg.height; //3150
 		const saveButton = document.getElementById("saveButton");
@@ -613,7 +613,7 @@ function calculateBackgroundHeight(amount) {
 function changeDisplayAmount() {
 	const displayAmountInput = document.getElementById("displayAmount");
 	const newDisplayAmount = parseInt(displayAmountInput.value);
-	const bgImg = document.getElementById("bgImg");
+	const bgImg = document.getElementById("background");
 	if (!isNaN(newDisplayAmount)) {
 		displayAmount = newDisplayAmount;
 		bgImg.style.height = String(calculateBackgroundHeight(newDisplayAmount)) + "px";
@@ -703,14 +703,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+//更换成选定的头像、id、好友码、ptt
 document.addEventListener("DOMContentLoaded", function () {
-	if(localStorage.saved_bg){
-		switchBg(0);
-	}
-});
-
-//更换成选定的头像、id、好友码、ptt、背景图
-document.addEventListener("DOMContentLoaded", function () {
+	console.log("localstorage:saved_icon:" + localStorage.saved_icon);
 	if (localStorage.saved_icon != null) {
 		switchSelect(localStorage.saved_icon);
 	} else {
@@ -729,18 +724,17 @@ document.addEventListener("DOMContentLoaded", function () {
 		refreshUID();
 	}
 	if (localStorage.saved_csv_name && localStorage.saved_csv_data) {
-		console.log("saved_bg:" + localStorage.saved_bg);
 		console.log("try refilling b39 with localstorage");
 		document.getElementById("b30Data").innerHTML = "";
 		csv_data = localStorage.saved_csv_data;
-		//console.log(localStorage.saved_csv_data);
+		console.log(localStorage.saved_csv_data);
 		refreshData(localStorage.saved_csv_data);
 		recalculateR10();
 	} else {
+
 		fetchAndSaveCSV(default_csv_name, csv_data); //显示一次默认b39
 	}
-	
-});
+})
 
 
 function cln() {
@@ -799,29 +793,6 @@ function switchSelect(path) {
 	console.log("localstorage:saved_icon:" + localStorage.saved_icon);
 }
 
-//切换背景图
-function switchBg(f){
-	f = parseFloat(f);
-	if(!localStorage.saved_bg){
-		localStorage.setItem("saved_bg", 8);
-		console.log("bg=" + localStorage.saved_bg);
-	}
-	const bg = document.getElementById("background");
-	console.log("current bg:" + localStorage.saved_bg);
-	localStorage.saved_bg = (parseFloat(localStorage.saved_bg) + parseFloat(f) + 9) % 9;
-	bg.style.opacity = 0;
-	setTimeout(function(){
-		bg.innerHTML = "";
-		let bgImg = document.createElement("img");
-		bgImg.id = "bgImg";
-		bgImg.src = "bgs/" + localStorage.saved_bg % 9 + ".webp";
-		bg.appendChild(bgImg);
-		bg.style.opacity = "100%";
-	}, 250)
-	
-	changeDisplayAmount();
-}
-
 
 //自动调整页面缩放，打开网页时占满横向空间
 function resizeWidth() {
@@ -830,4 +801,3 @@ function resizeWidth() {
 	} else {
 		document.body.style.zoom = 1;
 	}
-}

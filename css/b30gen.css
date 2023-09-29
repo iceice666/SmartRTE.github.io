@@ -34,18 +34,15 @@ body {
 	overflow: hidden;
 }
 
-#background, #bgImg{
+#background {
 	width: 1700px;
 	height: 3150px;
 	/* 3150px */
 	position: absolute;
 	/*-webkit-filter: blur(5px);*/
 	z-index: -999;
-	transition-duration: 0.25s;
-	opacity: 100%;
 }
 
-/* 
 #notice {
 	font-size: 200px;
 	position: absolute;

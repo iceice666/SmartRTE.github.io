@@ -46,6 +46,7 @@ function executeQuery(query) {
 		if (result.length > 0 && result[0].values) {
 			const columns = result[0].columns;
 			const values = result[0].values;
+      debugger;
 
 
 			// 创建表头
